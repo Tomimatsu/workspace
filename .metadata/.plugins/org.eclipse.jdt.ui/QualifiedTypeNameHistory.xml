@@ -3,4 +3,5 @@
 <fullyQualifiedTypeName name="com.parse.ParseObject"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.parse.ParseQuery"/>
+<fullyQualifiedTypeName name="com.parse.SignUpCallback"/>
 </qualifiedTypeNameHistroy>
