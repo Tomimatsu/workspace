@@ -1,0 +1,62 @@
+package com.parse.starter;
+
+import java.util.List;
+
+import test.gps.R;
+
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import com.parse.ParseUser;
+import android.app.Activity;
+import android.app.Application;
+import android.widget.TextView;
+
+public class ParseApplication extends Application {
+
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		private TextView text1 =(TextView)findViewById(R.id.textView1);
+		//初期設定
+		// Add your initialization code here
+		Parse.initialize(this,"oPb4e3gZpKDvuebWPsYPGzfWhcIlR1tSC4VDfhe2","PIa7DkP36tkAUyO7sTeg5T1CuxtxY2EF3r5v0dQn");
+		//Web アプリに接続するクライアントを匿名ユーザーにするメソッド
+		//ログイン前にパブリックなデータ (Parse では ParseObject と呼ぶ) を受信したいときとかに使う
+		ParseUser.enableAutomaticUser();
+		//アクセス権限の設定
+		ParseACL defaultACL = new ParseACL();	    
+		// If you would like all objects to be private by default, remove this line.
+		defaultACL.setPublicReadAccess(true);
+		ParseACL.setDefaultACL(defaultACL, true);
+		
+		//データ登録
+		ParseObject testObject = new ParseObject("TestObject");
+		testObject.put("foo", "bar");
+		testObject.saveInBackground();
+		testObject.put("foo", "car");
+		testObject.saveInBackground();
+//		try {
+//			testObject.save();
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		List<ParseObject> todos;
+		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TestObject");
+		query.orderByDescending("_created_at");
+		try {
+		    todos = query.find();
+		} catch (ParseException e) {
+		}
+		
+		
+		
+	}
+
+}
